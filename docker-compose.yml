@@ -39,14 +39,14 @@ services:
     ports:
       - '28082:28082'
   zookeeper:
-    image: confluentinc/cp-zookeeper:4.0.0
+    image: confluentinc/cp-zookeeper:latest
     environment:
       ZOOKEEPER_CLIENT_PORT: "2181"
       ZOOKEEPER_TICK_TIME: "2000"
     ports:
       - '2181:2181'
   kafka:
-    image: confluentinc/cp-enterprise-kafka:4.0.0
+    image: confluentinc/cp-enterprise-kafka:latest
     depends_on:
       - zookeeper
     environment:
@@ -70,8 +70,8 @@ services:
     ports:
       - '9092:9092'
       - '29092:29092'
-#  rabbitmq:
-#    image: rabbitmq:3-management
-#    ports:
-#      - '15672:15672'
-#      - '5672:5672'
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - '15672:15672'
+      - '5672:5672'

@@ -1,13 +1,14 @@
-FROM confluentinc/cp-kafka-connect-base:4.0.0
+FROM confluentinc/cp-kafka-connect-base:latest
 
-RUN pip install envtpl
+RUN pip3 install --user envtpl
 
-COPY target /opt/target
+ENV PATH="/home/appuser/.local/bin:${PATH}"
+
+COPY target /home/appuser/target
 COPY target/kafka-connect-target/usr/share/kafka-connect/kafka-connect-rabbitmq/* /usr/share/java/kafka/ 
-COPY config-templates /opt/config-templates
-COPY docker-entrypoint.sh /opt
-RUN chmod +x /opt/docker-entrypoint.sh
+COPY config-templates /home/appuser/config-templates
+COPY docker-entrypoint.sh /home/appuser
 
-WORKDIR /opt
+WORKDIR /home/appuser
 
 CMD [ "./docker-entrypoint.sh" ]

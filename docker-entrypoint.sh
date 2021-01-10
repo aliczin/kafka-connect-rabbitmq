@@ -27,18 +27,18 @@ echo ""
 
 # Parse through each config template and write out config file
 
-[ ! -d /opt/config ] && mkdir -p /opt/config
+[ ! -d /home/appuser/config ] && mkdir -p /home/appuser/config
 
-cd /opt/config-templates
+cd /home/appuser/config-templates
 for TEMPLATE in *
 do
     NAME=$(echo $TEMPLATE | awk -F '.tpl' '{print $1}')
-    envtpl < $TEMPLATE > /opt/config/$NAME
+    envtpl < $TEMPLATE > /home/appuser/config/$NAME
 done
 
-cd /opt
+cd /home/appuser
 
-CONFIG_FILES=$(find /opt/config/ -type f | tr '\n' ' ')
+CONFIG_FILES=$(find /home/appuser/config/ -type f | tr '\n' ' ')
 
 echo "Config files - $CONFIG_FILES"
 
